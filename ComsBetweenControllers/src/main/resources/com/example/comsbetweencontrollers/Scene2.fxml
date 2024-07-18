@@ -5,9 +5,9 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -15,14 +15,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="pane" prefHeight="634.0" prefWidth="757.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comsbetweencontrollers.Scene2Controller">
+<AnchorPane fx:id="pane" prefHeight="634.0" prefWidth="757.0" style="-fx-background-color: beige;" styleClass="pane" stylesheets="@Scene2.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comsbetweencontrollers.Scene2Controller">
    <children>
       <ScrollPane hbarPolicy="NEVER" layoutX="357.0" layoutY="40.0" prefHeight="528.0" prefWidth="356.0" style="-fx-border-color: #dbd4ba;" vbarPolicy="ALWAYS">
          <content>
             <GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="339.0" GridPane.halignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.39996337890625" minWidth="10.0" prefWidth="124.60003662109375" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.59998779296876" minWidth="10.0" prefWidth="214.19996337890626" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.40001373291017" minWidth="10.0" prefWidth="248.8000244140625" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.59998779296876" minWidth="10.0" prefWidth="91.1999755859375" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="52" minHeight="-52" prefHeight="52" vgrow="SOMETIMES" />
@@ -34,7 +34,7 @@
             </GridPane>
          </content></ScrollPane>
       <Button fx:id="logoutButton" layoutX="658.0" layoutY="584.0" mnemonicParsing="false" onAction="#SaveOnExit" text="Logout" />
-      <Pane layoutX="47.0" layoutY="40.0" prefHeight="528.0" prefWidth="278.0" style="-fx-background-color: #dbd4ba; -fx-background-radius: 4;">
+      <Pane layoutX="47.0" layoutY="40.0" prefHeight="528.0" prefWidth="278.0" style="-fx-background-radius: 4; -fx-background-color: #dbd4ba;">
          <children>
             <TextField fx:id="newPassNameField" layoutX="14.0" layoutY="46.0" prefHeight="26.0" prefWidth="254.0" promptText="Account Name">
                <cursor>
@@ -52,22 +52,22 @@
             <CheckBox fx:id="symbolsCheck" allowIndeterminate="true" layoutX="19.0" layoutY="182.0" mnemonicParsing="false" selected="true" text="Symbols" />
             <Label layoutX="14.0" layoutY="235.0" text="Set Symbols:" />
             <TextField fx:id="symbolsField" layoutX="110.0" layoutY="231.0" promptText="Default: $!_@?*&amp;" />
-            <TextField fx:id="sizeField" layoutX="214.0" layoutY="318.0" prefHeight="14.0" prefWidth="39.0" />
+            <TextField fx:id="sizeField" layoutX="112.0" layoutY="282.0" prefHeight="14.0" prefWidth="39.0" />
             <Separator layoutX="4.0" layoutY="389.0" prefHeight="3.0" prefWidth="271.0" style="-fx-background-color: black;" />
           <Button fx:id="rowButton" alignment="CENTER" layoutX="82.0" layoutY="488.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#addPass" prefHeight="26.0" prefWidth="114.0" text="SAVE PASSWORD">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TextField fx:id="viewPassBar" layoutX="28.0" layoutY="412.0" prefHeight="25.0" prefWidth="227.0" promptText="View Password" />
+            <TextField fx:id="viewPassBar" editable="false" layoutX="28.0" layoutY="412.0" prefHeight="25.0" prefWidth="227.0" promptText="View Password" />
             <Button alignment="CENTER" layoutX="82.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#generate" prefHeight="26.0" prefWidth="114.0" text="GENERATE">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
             <Label layoutX="15.0" layoutY="286.0" text="Password Size:" />
-            <Slider fx:id="sizeSlider" blockIncrement="0.0" layoutX="21.0" layoutY="324.0" majorTickUnit="8.0" max="32.0" min="8.0" minorTickCount="1" prefHeight="14.0" prefWidth="156.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="8.0" />
             <Label contentDisplay="CENTER" layoutX="93.0" prefHeight="37.0" prefWidth="77.0" text="New Password" textAlignment="RIGHT" textOverrun="CLIP" underline="true" wrapText="true" />
+            <MenuButton fx:id="lengthMenu" contentDisplay="BOTTOM" graphicTextGap="3.0" layoutX="154.0" layoutY="282.0" mnemonicParsing="false" />
          </children>
       </Pane>
    </children>

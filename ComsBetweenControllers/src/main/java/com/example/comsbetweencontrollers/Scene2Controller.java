@@ -2,14 +2,20 @@ package com.example.comsbetweencontrollers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -42,6 +48,9 @@ public class Scene2Controller {
     TextField symbolsField;
     @FXML
     TextField sizeField;
+
+    @FXML
+    MenuButton lengthMenu;
 
     @FXML
     CheckBox upperCaseCheck;
@@ -103,34 +112,29 @@ public class Scene2Controller {
                 con.setMinHeight(52);
                 con.setMaxHeight(52);
                 gridPane.getRowConstraints().add(con);
+                Pane popPane = makePane(ActiveList.get(i));
 
                 //Add name of item
-                Label addLabel = new Label(ActiveList.get(i).getName());
-                GridPane.setHalignment(addLabel, HPos.CENTER);
-                gridPane.add(addLabel,0,i); //sends item to first row
+
+                GridPane.setHalignment(popPane, HPos.CENTER);
+                gridPane.add(popPane,0,i); //sends item to first row
 
                 ButtonBar buttonBar = new ButtonBar();
                 // Create the buttons to go into the ButtonBar
-                Button thisPassword = new Button("Get Pass");
+                Button thisPassword = makeButton(ActiveList.get(i));
                 //ButtonBar.setButtonData(yesButton, ButtonBar.ButtonData.YES);
                 int finalI = i;
-                EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent e)
-                    {
 
-                        System.out.println(ActiveList.get(finalI).getEncryptedPassword());
-                    }
-                };
 
                 // when button is pressed
-                thisPassword.setOnAction(event);
+
                 thisPassword.setAlignment(Pos.CENTER);
-                buttonBar.getButtons().addAll(thisPassword);
+                //buttonBar.getButtons().addAll(thisPassword);
 
-                GridPane.setHalignment(buttonBar, HPos.CENTER);
+                GridPane.setHalignment(thisPassword, HPos.CENTER);
 
 
-                gridPane.add(buttonBar, 1,i);
+                gridPane.add(thisPassword, 1,i);
 
 
 
@@ -142,46 +146,10 @@ public class Scene2Controller {
         }
 
     }
-    public void Hardlaunch(String name, int placement){
-        RowConstraints con = new RowConstraints();
-        ColumnConstraints colCon = new ColumnConstraints();
-
-        // Here we set the pref height of the row, but you could also use .setPercentHeight(double) if you don't know much space you will need for each label.
-        con.setMinHeight(52);
-        con.setMaxHeight(52);
-        gridPane.getRowConstraints().add(con);
-
-        //gridPane.add(new Label("First"), 0,n);
-        Label addLabel = new Label(name);
-
-        //Sets item to Center Position
-        //then adds item
-        GridPane.setHalignment(addLabel, HPos.CENTER);
-        gridPane.add(addLabel,0,placement);
-        // Create the ButtonBar instance
-        ButtonBar buttonBar = new ButtonBar();
-        // Create the buttons to go into the ButtonBar
-        Button yesButton = new Button("Yes");
-        //ButtonBar.setButtonData(yesButton, ButtonBar.ButtonData.YES);
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e)
-            {
-                System.out.println(name);
-            }
-        };
-
-        // when button is pressed
-        yesButton.setOnAction(event);
-        yesButton.setAlignment(Pos.CENTER);
-        buttonBar.getButtons().addAll(yesButton);
-
-        GridPane.setHalignment(buttonBar, HPos.CENTER);
 
 
-        gridPane.add(buttonBar, 1,placement);
 
 
-    }
     public void displayPass(){
         viewPassBar.setText(generatePass.getEncryptedPassword());
 
@@ -197,12 +165,13 @@ public class Scene2Controller {
         }
 
         boolean[] include = {upperCaseCheck.isSelected(),numbersCheck.isSelected(),symbolsCheck.isSelected()};
-        System.out.println("Size:" + include.length);
-        for (boolean item : include){
-            System.out.print(item);
-        }
+        //System.out.println("Size:" + include.length);
 
-        System.out.println("From addRow\nsymbolsField: " + symbolsField.getText());
+        /*for (boolean item : include){
+            System.out.print(item);
+        }*/
+
+        //System.out.println("From addRow\nsymbolsField: " + symbolsField.getText());
         if(symbolsField.getText().equals("")){
              generatePass = new NewPassword(size, newPassNameField.getText(), include);
         }else{
@@ -284,41 +253,44 @@ public class Scene2Controller {
         con.setMaxHeight(52);
         gridPane.getRowConstraints().add(con);
 
-        //gridPane.add(new Label("First"), 0,n);
-        Label addLabel = new Label(generatePass.getName());
+        Pane pane = makePane(generatePass);
 
-        //Sets item to Center Position
-        //then adds item
-        GridPane.setHalignment(addLabel, HPos.CENTER);
-        gridPane.add(addLabel,0,placement);
-        // Create the ButtonBar instance
-        ButtonBar buttonBar = new ButtonBar();
+
+
+        //gridPane.add(new Label("First"), 0,n);
+
+
+
+
+
+
+
+
+            GridPane.setHalignment(pane, HPos.LEFT);
+            gridPane.add(pane,0,placement);
+
+
+
+
+
+
 
 
         // Create the buttons to go into the ButtonBar
-        Button newPassword = new Button("Get Pass");
+        Button newPassword = makeButton(generatePass);
         //ButtonBar.setButtonData(yesButton, ButtonBar.ButtonData.YES);
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent e)
-            {
-                System.out.println(generatePass.getEncryptedPassword());
-            }
-        };
-
-        // when button is pressed
-        newPassword.setOnAction(event);
 
 
 
 
         // Add buttons to the ButtonBar
         newPassword.setAlignment(Pos.CENTER);
-        buttonBar.getButtons().addAll(newPassword);
-
-        GridPane.setHalignment(buttonBar, HPos.CENTER);
 
 
-        gridPane.add(buttonBar, 1,placement);
+        GridPane.setHalignment(newPassword, HPos.CENTER);
+
+
+        gridPane.add(newPassword, 1,placement);
         n++;
         //generatePass = null;
         } else{
@@ -327,12 +299,7 @@ public class Scene2Controller {
 
 
     }
-    public void printYes(){
-        System.out.println("Yes");
-    }
-    public void printNo(){
-        System.out.println("No");
-    }
+
     public void savePasses(){
         try {
             AESEncryptDecrypt.sendToFile(ActiveList, fileKey, IV);
@@ -343,6 +310,25 @@ public class Scene2Controller {
 
 
 
+
+    }
+    //function to set Length menu and button effects to change value of sizeField
+    public void setSizeMenu(){
+        for (int i = 8; i<= 32; i = i+2){
+            String iText = String.valueOf(i);
+            MenuItem newItem = new MenuItem(iText);
+            // Setting Event to add to the menuitem;
+            EventHandler<ActionEvent> changeSizeFieldValue = new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent e)
+                {
+                    sizeField.setText(iText);
+                }
+            };
+            newItem.setOnAction(changeSizeFieldValue);
+
+            lengthMenu.getItems().add(newItem);
+
+        }
 
     }
     public void SaveOnExit(ActionEvent e){
@@ -360,6 +346,138 @@ public class Scene2Controller {
             System.out.println("Successful Logout");
             stage.close();
         }
+
+
+
+    }
+
+    private Pane makePane( Password generatePass){
+        Pane activePane = new Pane();
+        activePane.setMaxHeight(50);
+        activePane.setMinHeight(50);
+        activePane.setCursor(Cursor.HAND);
+        activePane.getStylesheets().add(getClass().getResource("Scene2.css").toExternalForm());
+        Label addLabel = new Label(generatePass.getName());
+
+        activePane.getChildren().add(addLabel);
+        activePane.getStyleClass().add("pane");
+
+        EventHandler<MouseEvent> onClick = new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent e)
+            {
+                activePane.setCursor(Cursor.CLOSED_HAND);
+                copyToClipBoard(generatePass.getEncryptedPassword());
+                activePane.setCursor(Cursor.HAND);
+
+
+
+
+
+
+
+
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("copyPopUp.fxml"));
+
+                Parent root;
+                try {
+                    root = loader.load();
+                    copyPopUpController copyController = loader.getController();
+                    copyController.getPopUpColor();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+
+
+
+
+                Scene scene = new Scene(root);
+
+
+                Stage stage = new Stage();
+
+
+                stage.setScene(scene);
+
+
+                stage.setTitle("My Window");
+
+
+
+                stage.show();
+
+                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    public void handle(WindowEvent we) {
+                        System.out.println("Stage is closing");
+                    }
+                });
+            };
+
+        };
+
+
+
+
+        activePane.setOnMouseClicked( onClick );
+
+        addLabel.layoutXProperty().bind(activePane.widthProperty().divide(5));
+        //addLabel.setStyle("-fx-label-padding: 100em 0 100em 0;");
+
+        addLabel.layoutYProperty().bind(activePane.heightProperty().subtract(addLabel.heightProperty()).divide(2));
+        //activePane.setStyle("-fx-background-color: green");
+
+        return activePane;
+    }
+
+    private void copyToClipBoard(String string){
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(string);
+        clipboard.setContent(content);
+
+
+    }
+
+    private Button makeButton(Password password){
+        Button editButton = new Button("View");
+
+        EventHandler <ActionEvent> setButton = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("buttonPopUp.fxml"));
+
+                Parent root;
+                try {
+                    root = loader.load();
+                    buttonPopUpController buttoncontroller = loader.getController();
+                    buttoncontroller.setUp(password);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+
+
+
+                Scene scene = new Scene(root);
+
+
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("My Window");
+                stage.show();
+                stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                    public void handle(WindowEvent we) {
+                        System.out.println("Stage is closing");
+                    }
+                });
+
+
+            }
+        };
+
+        editButton.setOnAction(setButton);
+        return editButton;
 
 
 

@@ -55,7 +55,7 @@ public class AESEncryptDecrypt {
             try {
                 masterPass = new SecretKeySpec(factory.generateSecret(spec)
                         .getEncoded(), "AES");
-                System.out.println("Intial MasterPass key" + encode(masterPass.getEncoded()));
+               // System.out.println("Intial MasterPass key" + encode(masterPass.getEncoded()));
             } catch (InvalidKeySpecException e) {
                 throw new RuntimeException(e);
             }
@@ -103,7 +103,7 @@ public class AESEncryptDecrypt {
             encrptionCipher.init(Cipher.ENCRYPT_MODE, masterPass);
 
             passIV = encrptionCipher.getIV();
-            System.out.println("MASTERIV: " + encode(passIV));
+            //System.out.println("MASTERIV: " + encode(passIV));
             byte[] encryptedBytes = encrptionCipher.doFinal(mainKeyInBytes);
 
             return encode(encryptedBytes);
@@ -130,7 +130,7 @@ public class AESEncryptDecrypt {
         }
 
         public byte[] getMasterPassKey() {
-            System.out.println("MASTERKEY FROM FUNCTION: " + encode(masterPass.getEncoded()));
+            //System.out.println("MASTERKEY FROM FUNCTION: " + encode(masterPass.getEncoded()));
             return masterPass.getEncoded();
         }
 
@@ -174,7 +174,7 @@ public class AESEncryptDecrypt {
 
             byte[] decryptedBytes = null;
 
-            System.err.println("MASTER PASS: " + encode(masterKey.getEncoded()) + "\nMAsterIV: " + encode(decryptionCipher.getIV()));
+            //System.err.println("MASTER PASS: " + encode(masterKey.getEncoded()) + "\nMAsterIV: " + encode(decryptionCipher.getIV()));
 
             decryptedBytes = decryptionCipher.doFinal(encryptedKeyBytes);
 
@@ -256,7 +256,7 @@ public class AESEncryptDecrypt {
             } catch (InvalidKeySpecException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("MASTER FROM FUNCTION " + encode(master.getEncoded()));
+            //System.out.println("MASTER FROM FUNCTION " + encode(master.getEncoded()));
             return master.getEncoded();
         }
 

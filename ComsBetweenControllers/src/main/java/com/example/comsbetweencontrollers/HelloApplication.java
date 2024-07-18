@@ -43,11 +43,8 @@ public class HelloApplication extends Application {
 
 
         Parent root = FXMLLoader.load(getClass().getResource(myFXML));
-
         Scene main = new Scene(root);
-
         stage.setScene(main);
-
         stage.show();
 
     }

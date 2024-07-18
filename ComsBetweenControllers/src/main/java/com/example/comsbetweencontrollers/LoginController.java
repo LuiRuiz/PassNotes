@@ -100,6 +100,7 @@ public class LoginController {
 
             //adds controller to main controller
             Scene2Controller scene2Controller = loader.getController();
+            scene2Controller.setSizeMenu();
             scene2Controller.initializeKey(fileKey,fileIV,firstRun);
             scene2Controller.setArray(firstRun);
             scene2Controller.populate();
@@ -113,6 +114,7 @@ public class LoginController {
 
             stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             scene = new Scene(root);
+
             stage.setScene(scene);
             stage.show();
 

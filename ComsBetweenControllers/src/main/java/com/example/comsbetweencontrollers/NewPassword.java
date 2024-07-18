@@ -24,14 +24,14 @@ public class NewPassword extends Password implements Serializable {
     }
     public NewPassword(int passLength, String name, boolean[] myInclusions, String mySymbols){
         super(passLength,name);
-        System.out.println("using Symbols consructor");
+        //System.out.println("using Symbols consructor");
         inclusions = myInclusions;
         for (boolean item: inclusions){
-            System.out.println(item);
+            //System.out.println(item);
         }
         if (inclusions[2]){
             smybols = mySymbols;
-            System.out.println("Symbols: "+ inclusions[2]);
+            //System.out.println("Symbols: "+ inclusions[2]);
         }
         //enables letters
         IncludedTypes.add(0);
@@ -54,11 +54,11 @@ public class NewPassword extends Password implements Serializable {
     }
     public NewPassword(int passLength, String name, boolean[] myInclusions){
         super(passLength,name);
-        System.out.println("using controctor without symbols");
+        //System.out.println("using controctor without symbols");
         inclusions = myInclusions;
 
         for (boolean item: inclusions){
-            System.out.println(item);
+            //System.out.println(item);
         }
 
         //enables letters
@@ -70,10 +70,10 @@ public class NewPassword extends Password implements Serializable {
             }
             boolCounter++;
         }
-        System.out.println("From constructor \nInclude types ="
-                );
+        //System.out.println("From constructor \nInclude types ="
+
         for (int items: IncludedTypes){
-            System.out.println(items);
+            //System.out.println(items);
         }
         for (Integer i : getPasswordArray(passLength)) {
 
@@ -99,11 +99,8 @@ public class NewPassword extends Password implements Serializable {
             }
 
         }
-        for (Integer item : passwordArray) {
-            System.out.print(item);
 
-        }
-        System.out.println("");
+
 
         List<Integer> intList = Arrays.asList(passwordArray);
 
@@ -111,11 +108,8 @@ public class NewPassword extends Password implements Serializable {
 
         intList.toArray(passwordArray);
 
-        for (Integer item : passwordArray) {
-            System.out.print(item);
 
-        }
-        System.out.println("");
+        //System.out.println("");
 
         return passwordArray;
     }

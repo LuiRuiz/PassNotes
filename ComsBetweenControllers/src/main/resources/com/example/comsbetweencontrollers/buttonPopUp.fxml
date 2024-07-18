@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainPane" minHeight="0.0" minWidth="0.0" prefHeight="193.0" prefWidth="413.0" style="-fx-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comsbetweencontrollers.buttonPopUpController">
+   <children>
+      <Pane fx:id="secondPane" layoutY="-3.0" prefHeight="22.0" prefWidth="414.0" />
+      <Label layoutX="28.0" layoutY="26.0" prefHeight="18.0" prefWidth="38.0" text="Name:" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="81.0" prefHeight="18.0" prefWidth="61.0" text="Password:" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="nameLabel" layoutX="28.0" layoutY="46.0" prefHeight="26.0" prefWidth="328.0" text="Label" />
+      <Label fx:id="passLabel" layoutX="28.0" layoutY="103.0" prefHeight="18.0" prefWidth="328.0" text="Label" />
+      <Button fx:id="saveButton" layoutX="361.0" layoutY="159.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="38.0" text="Save">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="copyButton" layoutX="361.0" layoutY="90.0" mnemonicParsing="false" onAction="#copyPass" prefHeight="22.0" prefWidth="38.0" text="Copy">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button fx:id="editButton" layoutX="361.0" layoutY="24.0" mnemonicParsing="false" onAction="#editName" prefHeight="22.0" prefWidth="38.0" text="Edit">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Button layoutX="20.0" layoutY="159.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="92.0" text="Change Password">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <Label fx:id="changeLabel" layoutX="125.0" layoutY="161.0" prefHeight="18.0" prefWidth="220.0" />
+      <Separator layoutX="16.0" layoutY="145.0" prefHeight="1.0" prefWidth="382.0" style="-fx-border-color: black; -fx-color: black;" />
+      <TextField fx:id="nameField" disable="true" layoutX="28.0" layoutY="46.0" onAction="#changeName" prefHeight="26.0" prefWidth="328.0" visible="false" />
+   </children>
+</AnchorPane>

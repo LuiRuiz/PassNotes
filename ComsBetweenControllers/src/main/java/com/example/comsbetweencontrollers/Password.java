@@ -63,5 +63,8 @@ public class Password implements Serializable {    protected String name;
 
         }
     }
+    public void setName(String newName){
+        this.name = newName;
+    }
 
 }
