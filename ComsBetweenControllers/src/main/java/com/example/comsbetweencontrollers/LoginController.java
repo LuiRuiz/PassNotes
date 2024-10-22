@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -112,7 +113,8 @@ public class LoginController {
             ///scene2Controller.displayName(); use this logic to send data
 
 
-            stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
             scene = new Scene(root);
 
             stage.setScene(scene);

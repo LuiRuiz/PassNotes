@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.CheckBox?>
@@ -9,66 +10,112 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="pane" prefHeight="634.0" prefWidth="757.0" style="-fx-background-color: beige;" styleClass="pane" stylesheets="@Scene2.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comsbetweencontrollers.Scene2Controller">
+<AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="661.0" prefWidth="759.0" style="-fx-background-color: beige;" styleClass="pane" stylesheets="@Scene2.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comsbetweencontrollers.Scene2Controller">
    <children>
-      <ScrollPane hbarPolicy="NEVER" layoutX="357.0" layoutY="40.0" prefHeight="528.0" prefWidth="356.0" style="-fx-border-color: #dbd4ba;" vbarPolicy="ALWAYS">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="386.0" layoutY="63.0" prefHeight="566.0" prefWidth="347.0" style="-fx-border-color: #dbd4ba;" vvalue="1.0" AnchorPane.bottomAnchor="51.399999999999864" AnchorPane.leftAnchor="386.0" AnchorPane.rightAnchor="47.600000000000136" AnchorPane.topAnchor="63.0">
          <content>
-            <GridPane fx:id="gridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="339.0" GridPane.halignment="CENTER">
+            <GridPane fx:id="gridPane" maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="0.0" prefWidth="354.0" GridPane.halignment="CENTER">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.40001373291017" minWidth="10.0" prefWidth="248.8000244140625" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.59998779296876" minWidth="10.0" prefWidth="91.1999755859375" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="Infinity" minWidth="10.0" percentWidth="50.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="52" minHeight="-52" prefHeight="52" vgrow="SOMETIMES" />
 
               </rowConstraints>
                <children>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES" />
                </children>
             </GridPane>
          </content></ScrollPane>
-      <Button fx:id="logoutButton" layoutX="658.0" layoutY="584.0" mnemonicParsing="false" onAction="#SaveOnExit" text="Logout" />
-      <Pane layoutX="47.0" layoutY="40.0" prefHeight="528.0" prefWidth="278.0" style="-fx-background-radius: 4; -fx-background-color: #dbd4ba;">
+      <VBox layoutY="36.8" prefHeight="586.0" prefWidth="338.0" style="-fx-background-color: #575347;" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="36.200000000000045">
          <children>
-            <TextField fx:id="newPassNameField" layoutX="14.0" layoutY="46.0" prefHeight="26.0" prefWidth="254.0" promptText="Account Name">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </TextField>
-            <CheckBox fx:id="upperCaseCheck" allowIndeterminate="true" layoutX="19.0" layoutY="84.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="146.0" selected="true" text="UpperCase">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></CheckBox>
-            <CheckBox fx:id="numbersCheck" allowIndeterminate="true" layoutX="19.0" layoutY="129.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="146.0" selected="true" text="Numbers">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></CheckBox>
-            <CheckBox fx:id="symbolsCheck" allowIndeterminate="true" layoutX="19.0" layoutY="182.0" mnemonicParsing="false" selected="true" text="Symbols" />
-            <Label layoutX="14.0" layoutY="235.0" text="Set Symbols:" />
-            <TextField fx:id="symbolsField" layoutX="110.0" layoutY="231.0" promptText="Default: $!_@?*&amp;" />
-            <TextField fx:id="sizeField" layoutX="112.0" layoutY="282.0" prefHeight="14.0" prefWidth="39.0" />
-            <Separator layoutX="4.0" layoutY="389.0" prefHeight="3.0" prefWidth="271.0" style="-fx-background-color: black;" />
-          <Button fx:id="rowButton" alignment="CENTER" layoutX="82.0" layoutY="488.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#addPass" prefHeight="26.0" prefWidth="114.0" text="SAVE PASSWORD">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <TextField fx:id="viewPassBar" editable="false" layoutX="28.0" layoutY="412.0" prefHeight="25.0" prefWidth="227.0" promptText="View Password" />
-            <Button alignment="CENTER" layoutX="82.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#generate" prefHeight="26.0" prefWidth="114.0" text="GENERATE">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label layoutX="15.0" layoutY="286.0" text="Password Size:" />
-            <Label contentDisplay="CENTER" layoutX="93.0" prefHeight="37.0" prefWidth="77.0" text="New Password" textAlignment="RIGHT" textOverrun="CLIP" underline="true" wrapText="true" />
-            <MenuButton fx:id="lengthMenu" contentDisplay="BOTTOM" graphicTextGap="3.0" layoutX="154.0" layoutY="282.0" mnemonicParsing="false" />
+            <Accordion prefHeight="568.0" prefWidth="338.0" style="-fx-border-color: transparent;">
+               <panes>
+                  <TitledPane alignment="BASELINE_RIGHT" animated="false" contentDisplay="TEXT_ONLY" expanded="false" graphicTextGap="0.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="450.0" prefWidth="337.0" scaleShape="false" style="-fx-min-height: 100;" stylesheets="@Scene2.css" text="New Password">
+                     <content>
+                        <Pane fx:id="PasswordField" nodeOrientation="LEFT_TO_RIGHT" prefHeight="471.0" prefWidth="330.0" style="-fx-background-radius: 4; -fx-background-color: #dbd4ba;">
+                           <children>
+                              <TextField fx:id="newPassNameField" layoutX="28.0" layoutY="47.0" prefHeight="26.0" prefWidth="254.0" promptText="Account Name">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </TextField>
+                              <CheckBox fx:id="upperCaseCheck" allowIndeterminate="true" layoutX="30.0" layoutY="83.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="146.0" selected="true" text="UpperCase">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </CheckBox>
+                              <CheckBox fx:id="numbersCheck" allowIndeterminate="true" layoutX="205.0" layoutY="83.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="146.0" selected="true" text="Numbers">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </CheckBox>
+                              <CheckBox fx:id="symbolsCheck" allowIndeterminate="true" layoutX="30.0" layoutY="135.0" mnemonicParsing="false" selected="true" text="Symbols" />
+                              <Label layoutX="30.0" layoutY="172.0" text="Set Symbols:" />
+                              <TextField fx:id="symbolsField" layoutX="30.0" layoutY="198.0" prefHeight="25.0" prefWidth="250.0" promptText="Default: $!_@?*&amp;" />
+                              <TextField fx:id="sizeField" layoutX="143.0" layoutY="238.0" prefHeight="14.0" prefWidth="39.0" />
+                              <Separator layoutY="274.0" prefHeight="4.0" prefWidth="328.0" style="-fx-background-color: black;" />
+                              <Button fx:id="rowButton" alignment="CENTER" layoutX="164.0" layoutY="335.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#addPass" prefHeight="26.0" prefWidth="114.0" text="SAVE PASSWORD">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <TextField fx:id="viewPassBar" editable="false" layoutX="49.0" layoutY="293.0" prefHeight="25.0" prefWidth="227.0" promptText="View Password" />
+                              <Button alignment="CENTER" layoutX="45.0" layoutY="335.0" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#generate" prefHeight="26.0" prefWidth="104.0" text="GENERATE">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Label layoutX="30.0" layoutY="242.0" text="Password Size:" />
+                              <Label contentDisplay="CENTER" layoutX="126.0" prefHeight="37.0" prefWidth="77.0" text="New Password" textAlignment="RIGHT" textOverrun="CLIP" underline="true" wrapText="true" />
+                              <MenuButton fx:id="lengthMenu" contentDisplay="BOTTOM" graphicTextGap="3.0" layoutX="196.0" layoutY="238.0" mnemonicParsing="false" />
+                           </children>
+                        </Pane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane alignment="BASELINE_RIGHT" animated="false" contentDisplay="TEXT_ONLY" expanded="false" graphicTextGap="0.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="413.0" prefWidth="337.0" scaleShape="false" style="-fx-min-height: 100;" stylesheets="@Scene2.css" text="Search">
+                     <content>
+                        <Pane nodeOrientation="LEFT_TO_RIGHT" prefHeight="462.0" prefWidth="303.0" style="-fx-background-color: #dbd4ba;">
+                           <children>
+                              <TextField fx:id="searchField" layoutX="63.0" layoutY="49.0" prefHeight="29.0" prefWidth="148.0" />
+                              <Button layoutX="211.0" layoutY="49.0" mnemonicParsing="false" onAction="#search" text="Search" />
+                              <Label layoutX="121.0" layoutY="14.0" text="Find Password" underline="true" />
+                              <ScrollPane layoutX="63.0" layoutY="104.0" prefHeight="200.0" prefWidth="200.0">
+                                 <content>
+                                    <GridPane fx:id="searchGrid" prefHeight="30.0" prefWidth="197.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                    </GridPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </Pane>
+                     </content></TitledPane>
+               </panes>
+            </Accordion>
          </children>
-      </Pane>
+      </VBox>
+      <Button fx:id="logoutButton" alignment="BASELINE_CENTER" layoutX="2.0" layoutY="589.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#SaveOnExit" prefHeight="60.0" prefWidth="338.0" text="Logout" AnchorPane.bottomAnchor="29.0" AnchorPane.leftAnchor="0.0" />
+      <AnchorPane fx:id="appBar" prefHeight="36.0" prefWidth="768.0" style="-fx-background-color: #575347;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="TitleButton" alignment="CENTER" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="646.0" layoutY="5.0" maxWidth="-Infinity" minWidth="0.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#maximize" prefHeight="27.0" prefWidth="36.0" text="◻" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="4.0" />
+            <Button fx:id="TitleButton" alignment="CENTER" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="692.0" layoutY="5.0" maxWidth="-Infinity" minWidth="0.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#SaveOnExit" prefHeight="27.0" prefWidth="36.0" text="X" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0" />
+            <Button fx:id="TitleButton" alignment="CENTER" contentDisplay="TEXT_ONLY" graphicTextGap="0.0" layoutX="599.0" layoutY="5.0" maxWidth="-Infinity" minWidth="8.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#minimize" prefHeight="11.0" prefWidth="36.0" style="-fx-background-radius: 30;" text="_" textAlignment="CENTER" textFill="WHITE" wrapText="true" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="4.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="3.0" layoutY="615.0" prefHeight="27.0" prefWidth="757.0" style="-fx-background-color: #575347;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>

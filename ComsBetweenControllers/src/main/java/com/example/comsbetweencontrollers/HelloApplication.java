@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -45,6 +46,7 @@ public class HelloApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource(myFXML));
         Scene main = new Scene(root);
         stage.setScene(main);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
 
     }

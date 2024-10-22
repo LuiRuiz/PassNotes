@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="AnchorPane" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comsbetweencontrollers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" styleClass="AnchorPane" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.comsbetweencontrollers.LoginController">
    <children>
       <Pane fx:id="standardLogin" layoutX="110.0" layoutY="101.0" prefHeight="182.0" prefWidth="380.0" styleClass="pane" stylesheets="@Login.css">
          <children>
             <PasswordField fx:id="loginField" layoutX="133.0" layoutY="56.0" />
-            <Label fx:id="UserNameLabel" layoutX="55.0" layoutY="56.0" prefHeight="26.0" prefWidth="71.0" text="UserName:" />
+            <Label fx:id="UserNameLabel" layoutX="55.0" layoutY="56.0" prefHeight="26.0" prefWidth="71.0" text="Password:" />
             <Button fx:id="button" layoutX="176.0" layoutY="112.0" mnemonicParsing="false" onAction="#pressLogin" text="Login" />
             <Label fx:id="PasswordErrorString" layoutX="55.0" layoutY="91.0" opacity="0.0" text="Error: Invalid Password" textFill="#ff1e1e" />
          </children>

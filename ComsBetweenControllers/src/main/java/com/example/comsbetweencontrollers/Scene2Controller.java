@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -64,6 +65,9 @@ public class Scene2Controller {
     @FXML
     TextField viewPassBar;
 
+    @FXML TextField searchField;
+    @FXML GridPane searchGrid;
+
 
 
 
@@ -104,9 +108,27 @@ public class Scene2Controller {
     }
     public void populate(){
         if(ActiveList.size() >=1){
+            gridPane.getChildren().clear();
             for(int i = 0; i < ActiveList.size(); i++){
+
+                //ColumnConstraints colCon = (ColumnConstraints) gridPane.getColumnConstraints();
+                //RowConstraints con = (RowConstraints) gridPane.getRowConstraints();
+
+
+
+
+
+
+
+
+
+
                 RowConstraints con = new RowConstraints();
-                //-ColumnConstraints colCon = new ColumnConstraints();
+                ColumnConstraints colCon1 = new ColumnConstraints();
+
+
+
+
 
                 // Here we set the pref height of the row, but you could also use .setPercentHeight(double) if you don't know much space you will need for each label.
                 con.setMinHeight(52);
@@ -117,12 +139,29 @@ public class Scene2Controller {
                 //Add name of item
 
                 GridPane.setHalignment(popPane, HPos.CENTER);
-                gridPane.add(popPane,0,i); //sends item to first row
+                gridPane.add(popPane,0,i);
+                popPane.prefWidth(popPane.USE_COMPUTED_SIZE);//sends item to first row
 
                 ButtonBar buttonBar = new ButtonBar();
+                //buttonBar.setStyle("-fx-background-color: white;");
                 // Create the buttons to go into the ButtonBar
                 Button thisPassword = makeButton(ActiveList.get(i));
-                //ButtonBar.setButtonData(yesButton, ButtonBar.ButtonData.YES);
+                Button delete = new Button("\uD83D\uDDD1");
+
+                delete.setMaxSize(11, 36);
+                delete.setId("gridButton");
+                delete.getStylesheets().add(getClass().getResource("Scene2.css").toExternalForm());
+
+                int finalI1 = i;
+                EventHandler <ActionEvent> deleteFunction = new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        deletePass(ActiveList.get(finalI1));
+
+                    }
+                };
+                delete.setOnAction(deleteFunction);
+                buttonBar.getButtons().addAll(delete,thisPassword);
                 int finalI = i;
 
 
@@ -131,10 +170,10 @@ public class Scene2Controller {
                 thisPassword.setAlignment(Pos.CENTER);
                 //buttonBar.getButtons().addAll(thisPassword);
 
-                GridPane.setHalignment(thisPassword, HPos.CENTER);
+                GridPane.setHalignment(buttonBar, HPos.CENTER);
 
 
-                gridPane.add(thisPassword, 1,i);
+                gridPane.add(buttonBar, 1,i);
 
 
 
@@ -238,7 +277,10 @@ public class Scene2Controller {
     public void addPass(){
         if (generatePass.getEncryptedPassword() != null){
         ActiveList.add(generatePass);
+        populate();
 
+
+        /*
         int placement = ActiveList.size()-1;
 
 
@@ -252,6 +294,17 @@ public class Scene2Controller {
         con.setMinHeight(52);
         con.setMaxHeight(52);
         gridPane.getRowConstraints().add(con);
+
+        ColumnConstraints firstCol = new ColumnConstraints();
+        //firstCol.setHgrow(Priority.ALWAYS);
+        firstCol.setPercentWidth(70);
+
+        ColumnConstraints secondCol = new ColumnConstraints();
+        //secondCol.setPercentWidth(30);
+        secondCol.setHgrow(Priority.ALWAYS);
+
+
+        gridPane.getColumnConstraints().addAll(firstCol,secondCol );
 
         Pane pane = makePane(generatePass);
 
@@ -293,9 +346,13 @@ public class Scene2Controller {
         gridPane.add(newPassword, 1,placement);
         n++;
         //generatePass = null;
+
+         */
         } else{
             System.out.println("Error in addPass");
         }
+
+
 
 
     }
@@ -359,6 +416,7 @@ public class Scene2Controller {
         activePane.getStylesheets().add(getClass().getResource("Scene2.css").toExternalForm());
         Label addLabel = new Label(generatePass.getName());
 
+
         activePane.getChildren().add(addLabel);
         activePane.getStyleClass().add("pane");
 
@@ -421,10 +479,16 @@ public class Scene2Controller {
 
         activePane.setOnMouseClicked( onClick );
 
-        addLabel.layoutXProperty().bind(activePane.widthProperty().divide(5));
+        //addLabel.layoutXProperty().bind(activePane.widthProperty().divide(10));
+
+
         //addLabel.setStyle("-fx-label-padding: 100em 0 100em 0;");
+        //addLabel.prefWidth(Parent.USE_COMPUTED_SIZE);
 
         addLabel.layoutYProperty().bind(activePane.heightProperty().subtract(addLabel.heightProperty()).divide(2));
+        addLabel.setTextOverrun(OverrunStyle.CLIP);
+        addLabel.setEllipsisString("...");
+        addLabel.setWrapText(true);
         //activePane.setStyle("-fx-background-color: green");
 
         return activePane;
@@ -440,7 +504,7 @@ public class Scene2Controller {
     }
 
     private Button makeButton(Password password){
-        Button editButton = new Button("View");
+        Button editButton = new Button("≡");
 
         EventHandler <ActionEvent> setButton = new EventHandler<ActionEvent>() {
             @Override
@@ -468,7 +532,8 @@ public class Scene2Controller {
                 stage.show();
                 stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                     public void handle(WindowEvent we) {
-                        System.out.println("Stage is closing");
+                        //System.out.println("Stage is closing");
+                        populate();
                     }
                 });
 
@@ -482,6 +547,87 @@ public class Scene2Controller {
 
 
     }
+
+    public void deletePass(Password myPass){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Password");
+        alert.setHeaderText("Are you sure you wish to delete this password.\n (Deleted Passwords CANNOT be recovered");
+        alert.setContentText("DO YOU WISH TO CONTINUE?");
+
+        if (alert.showAndWait().get() == ButtonType.OK){
+            stage = (Stage) pane.getScene().getWindow();
+
+            ActiveList.remove(myPass);
+            populate();
+
+
+        }
+
+
+
+    }
+
+    @FXML
+    private void minimize(ActionEvent action){
+        Stage stage = (Stage) pane.getScene().getWindow();
+        stage.setIconified(true);
+
+    }
+    @FXML
+    private void maximize(ActionEvent action){
+        Stage stage = (Stage) pane.getScene().getWindow();
+
+        if(stage.isMaximized()){
+            stage.setMaximized(false);
+        }else{
+            stage.setMaximized(true);
+        }
+
+    }
+
+    @FXML
+    private void search(ActionEvent searchButton){
+        String searchWord = searchField.getText();
+        int i=0;
+        searchGrid.getChildren().clear();
+
+        for (Password item : ActiveList){
+
+            if(item.getName().contains(searchWord)){
+
+                Pane newPane = makePane(item);
+
+                i++;
+                RowConstraints con = new RowConstraints();
+                // Here we set the pref height of the row, but you could also use .setPercentHeight(double) if you don't know much space you will need for each label.
+                con.setMinHeight(52);
+                con.setMaxHeight(52);
+                searchGrid.getRowConstraints().add(con);
+                searchGrid.add(newPane,0,i);
+
+
+
+            }
+        }
+        if(i==0){
+
+            Pane activePane = new Pane();
+            activePane.setMaxHeight(50);
+            activePane.setMinHeight(50);
+            activePane.setCursor(Cursor.HAND);
+            activePane.getStylesheets().add(getClass().getResource("Scene2.css").toExternalForm());
+            Label addLabel = new Label("No Results Found");
+            activePane.getChildren().add(addLabel);
+            activePane.getStyleClass().add("pane");
+            RowConstraints con = new RowConstraints();
+            // Here we set the pref height of the row, but you could also use .setPercentHeight(double) if you don't know much space you will need for each label.
+            con.setMinHeight(52);
+            con.setMaxHeight(52);
+            gridPane.getRowConstraints().add(con);
+            searchGrid.add(activePane,0,i);
+        }
+    }
+
 
 
 
